@@ -77,6 +77,8 @@ fn main() {
         && env::var("CARGO_CFG_TARGET_ENV").unwrap() == "msvc"
     {
         patch_files.push("basic_msvc_compat.patch");
+        // https://github.com/codeplea/tinyexpr/issues/34
+        patch_files.push("compiler_error_C2099.patch");
     }
 
     if env::var("CARGO_FEATURE_EXPORTS").is_ok() {

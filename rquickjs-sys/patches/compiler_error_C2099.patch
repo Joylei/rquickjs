@@ -1,0 +1,26 @@
+From b8a4c360ac5534a0f73ab53436507cd79e187561 Mon Sep 17 00:00:00 2001
+From: joylei <leingliu@gmail.com>
+Date: Thu, 3 Jun 2021 21:37:23 +0800
+Subject: [PATCH] patch compiler error C2099
+
+---
+ quickjs.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/quickjs.c b/quickjs.c
+index 48aeffc..4ac7507 100644
+--- a/quickjs.c
++++ b/quickjs.c
+@@ -41906,6 +41906,9 @@ static JSValue js_math_random(JSContext *ctx, JSValueConst this_val,
+     return __JS_NewFloat64(ctx, u.d - 1.0);
+ }
+ 
++#pragma function (ceil)
++#pragma function (floor)
++
+ static const JSCFunctionListEntry js_math_funcs[] = {
+     JS_CFUNC_MAGIC_DEF("min", 2, js_math_min_max, 0 ),
+     JS_CFUNC_MAGIC_DEF("max", 2, js_math_min_max, 1 ),
+-- 
+2.31.1.windows.1
+
